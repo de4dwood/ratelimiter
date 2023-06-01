@@ -1,6 +1,7 @@
 package presentation
 
 import (
+	"fmt"
 	"rt/domain"
 	"rt/lib"
 
@@ -39,6 +40,7 @@ func (H *httpApi) Request(c *fiber.Ctx) error {
 	if user == "" {
 		return c.Status(400).JSON(fiber.Map{"error": "plz send user"})
 	}
+	fmt.Println(&c.Request().Header)
 	permit, err := H.app.Request(c.Context(), user, URL, c.Context().Time())
 	if err != nil {
 		return c.Status(500).JSON(fiber.Map{"there is an error ": err.Error()})

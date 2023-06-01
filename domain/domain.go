@@ -70,7 +70,7 @@ func (s *domain) Request(ctx context.Context, user, URL string, t time.Time) (bo
 }
 
 func (s *domain) GetApiConfigs(ctx context.Context, URL string) ([]Config, error) {
-	results, err := s.data.GetApiConfigs(ctx, URL)
+	results, err := s.data.GetConfigs(ctx, URL)
 	var configs []Config
 	if err != nil {
 		return nil, err
@@ -139,7 +139,7 @@ func (s *domain) GetAllConfigs(ctx context.Context) ([]Config, error) {
 
 func (s *domain) GetApiConfig(ctx context.Context, URL, id string) (Config, error) {
 	var config Config
-	result, err := s.data.GetApiConfig(ctx, URL, id)
+	result, err := s.data.GetConfig(ctx, URL, id)
 	if err != nil {
 		return config, err
 	}

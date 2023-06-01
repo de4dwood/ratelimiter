@@ -41,11 +41,12 @@ func main() {
 
 	store := data.NewDataRedis(redisOpt, ttL)
 	service := domain.NewDomain(store)
+	present := presentation.NewHttp(service)
 	sigs := make(chan os.Signal, 1)
 	errChan := make(chan int, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
-		present := presentation.NewHttp(service)
+
 		if listen == "" {
 			present.Start(":9000")
 		} else {

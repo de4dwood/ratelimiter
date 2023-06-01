@@ -89,7 +89,7 @@ func (d *DataRedis) UpdateConfig(ctx context.Context, URL, id string, c map[stri
 	return nil
 
 }
-func (d *DataRedis) GetApiConfig(ctx context.Context, URL, id string) (map[string]string, error) {
+func (d *DataRedis) GetConfig(ctx context.Context, URL, id string) (map[string]string, error) {
 	key := d.keyPrefix + ":config:" + id + ":" + URL
 	result, err := d.client.HGetAll(ctx, key).Result()
 	if err != nil {
@@ -99,7 +99,7 @@ func (d *DataRedis) GetApiConfig(ctx context.Context, URL, id string) (map[strin
 
 }
 
-func (d *DataRedis) GetApiConfigs(ctx context.Context, URL string) ([]map[string]string, error) {
+func (d *DataRedis) GetConfigs(ctx context.Context, URL string) ([]map[string]string, error) {
 	keyPattern := d.keyPrefix + ":config:*:" + URL
 	var configs []map[string]string
 	keys, err := d.client.Keys(ctx, keyPattern).Result()
